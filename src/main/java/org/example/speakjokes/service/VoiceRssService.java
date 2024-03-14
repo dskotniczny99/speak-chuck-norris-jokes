@@ -29,7 +29,7 @@ public class VoiceRssService {
         this.audioPlayService = audioPlayService;
     }
 
-    public boolean speakJoke(String textToSpeak) throws IOException {
+    public boolean speakJoke(String textToSpeak){
         log.info("speakJoke()");
 
         final HttpUrl httpUrl = new HttpUrl.Builder()
@@ -53,6 +53,8 @@ public class VoiceRssService {
                 return true;
             }
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         log.info("speakJoke(...) " + false);
