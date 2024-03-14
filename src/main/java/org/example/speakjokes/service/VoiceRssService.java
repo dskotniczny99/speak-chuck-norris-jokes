@@ -1,21 +1,18 @@
 package org.example.speakjokes.service;
 
-import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 
+@Slf4j
 public class VoiceRssService {
 
-    private static final String API_URL = "http://api.voicerss.org/?key=1234567890QWERTY&hl=en-us&src=Hello, world!";
-    private final Logger log = Logger.getLogger(VoiceRssService.class.getName());
     private OkHttpClient client;
     private final AudioPlayService audioPlayService;
 

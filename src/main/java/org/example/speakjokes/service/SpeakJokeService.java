@@ -1,14 +1,18 @@
 package org.example.speakjokes.service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.speakjokes.api.ChuckNorrisJokesApiResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
 
+
 @AllArgsConstructor
+@Slf4j
 public class SpeakJokeService {
 
-    private final Logger log = Logger.getLogger(SpeakJokeService.class.getName());
+
     private final ChuckNorrisJokesService chuckNorrisJokesService;
     private final VoiceRssService voiceRssService;
 
