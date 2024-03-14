@@ -1,6 +1,7 @@
 package org.example.speakjokes;
 
 import org.example.speakjokes.api.ChuckNorrisJokesApiResponse;
+import org.example.speakjokes.controller.ChuckNorrisJokesController;
 import org.example.speakjokes.service.ChuckNorrisJokesService;
 
 public class ChuckNorrisJokesApplication {
@@ -10,6 +11,6 @@ public class ChuckNorrisJokesApplication {
 
         ChuckNorrisJokesApiResponse response = controller.randomJoke();
         String joke = response.getValue();
-        System.out.println(joke);
+        // System.out.println(joke);
     }
 }
