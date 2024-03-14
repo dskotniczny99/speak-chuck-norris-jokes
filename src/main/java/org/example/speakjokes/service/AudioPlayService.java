@@ -1,13 +1,17 @@
 package org.example.speakjokes.service;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Logger;
 
+
+@Slf4j
 public class AudioPlayService {
 
-    private final Logger log = Logger.getLogger(AudioPlayService.class.getName());
     private static final int BUFFER_SIZE = 4096;
 
     public void play(InputStream inputStream ) {

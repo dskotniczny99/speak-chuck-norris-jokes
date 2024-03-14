@@ -2,20 +2,20 @@ package org.example.speakjokes.service;
 
 
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.example.speakjokes.api.ChuckNorrisJokesApiResponse;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-
+@Service
+@Slf4j
 public class ChuckNorrisJokesService {
 
     private static final String API_URL = "https://api.chucknorris.io/jokes/random";
-    private final Logger log = Logger.getLogger(ChuckNorrisJokesService.class.getName());
     private final OkHttpClient client = new OkHttpClient();
 
     public ChuckNorrisJokesApiResponse randomJoke() {
@@ -26,7 +26,7 @@ public class ChuckNorrisJokesService {
             log.info("randomJoke: " + chuckNorrisJokesApiResponse);
             return chuckNorrisJokesApiResponse;
         } catch (IOException exception) {
-            log.log(Level.SEVERE, "Unable to connect with external server", exception);
+            log.error("Unable to connect with external server", exception);
         }
         log.info("Random joke: " + null);
         return null;
