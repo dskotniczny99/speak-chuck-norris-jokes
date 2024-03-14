@@ -1,5 +1,6 @@
 package org.example.speakjokes.service;
 
+
 import org.example.speakjokes.api.ChuckNorrisJokesApiResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

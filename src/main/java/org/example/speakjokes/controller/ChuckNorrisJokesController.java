@@ -1,4 +1,4 @@
-package org.example.speakjokes;
+package org.example.speakjokes.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.speakjokes.api.ChuckNorrisJokesApiResponse;
