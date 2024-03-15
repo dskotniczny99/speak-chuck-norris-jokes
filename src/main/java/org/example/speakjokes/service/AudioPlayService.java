@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Logger;
 
-
+@Service
 @Slf4j
 public class AudioPlayService {
 
