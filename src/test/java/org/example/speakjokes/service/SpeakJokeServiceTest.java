@@ -1,5 +1,7 @@
 package org.example.speakjokes.service;
 
+import org.example.speakjokes.repository.JokesRepository;
+import org.example.speakjokes.repository.entity.JokesEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,8 @@ class SpeakJokeServiceTest {
     void speakJoke() {
 
         // given
-        ChuckNorrisJokesService chuckNorrisJokesService = new ChuckNorrisJokesService();
+        JokesRepository jokesRepository = jokeEntity -> jokeEntity;
+        ChuckNorrisJokesService chuckNorrisJokesService = new ChuckNorrisJokesService(jokesRepository);
 
         AudioPlayService audioPlayService = new AudioPlayService();
         VoiceRssService voiceRssService = new VoiceRssService(audioPlayService);
