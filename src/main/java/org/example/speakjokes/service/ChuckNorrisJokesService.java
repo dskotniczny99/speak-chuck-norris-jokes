@@ -2,28 +2,43 @@ package org.example.speakjokes.service;
 
 
 import com.google.gson.Gson;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.example.speakjokes.api.ChuckNorrisJokesApiResponse;
+import org.example.speakjokes.repository.JokesRepository;
+import org.example.speakjokes.repository.entity.JokesEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+@AllArgsConstructor
 @Service
 @Slf4j
+
 public class ChuckNorrisJokesService {
 
     private static final String API_URL = "https://api.chucknorris.io/jokes/random";
     private final OkHttpClient client = new OkHttpClient();
+
+    private final JokesRepository jokesRepository;
 
     public ChuckNorrisJokesApiResponse randomJoke() {
         log.info("Random joke: ");
         try {
             String responseBody = getResponse(API_URL);
             final ChuckNorrisJokesApiResponse chuckNorrisJokesApiResponse = convert(responseBody);
-            log.info("randomJoke: " + chuckNorrisJokesApiResponse);
+            String joke = chuckNorrisJokesApiResponse.getValue();
+            if (joke.length() > 255) {
+                String subJoke = joke.substring(0, 255);
+                JokesEntity jokeEntity = new JokesEntity(subJoke);
+                jokesRepository.save(jokeEntity);
+            }else{
+                JokesEntity jokeEntity = new JokesEntity(joke);
+                jokesRepository.save(jokeEntity);
+            }
             return chuckNorrisJokesApiResponse;
         } catch (IOException exception) {
             log.error("Unable to connect with external server", exception);

@@ -2,6 +2,8 @@ package org.example.speakjokes.service;
 
 
 import org.example.speakjokes.api.ChuckNorrisJokesApiResponse;
+import org.example.speakjokes.repository.JokesRepository;
+import org.example.speakjokes.repository.entity.JokesEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +15,7 @@ class ChuckNorrisJokesServiceTest {
     void run() throws IOException {
 
         // given
-        ChuckNorrisJokesService service = new ChuckNorrisJokesService();
+        ChuckNorrisJokesService service = new ChuckNorrisJokesService(null);
         final String url = "https://api.chucknorris.io/jokes/random";
 
         // when
@@ -27,7 +29,7 @@ class ChuckNorrisJokesServiceTest {
     void convert() {
 
         // given
-        ChuckNorrisJokesService service = new ChuckNorrisJokesService();
+        ChuckNorrisJokesService service = new ChuckNorrisJokesService(null);
 
         // when
         final ChuckNorrisJokesApiResponse response = service.convert("""
@@ -45,15 +47,17 @@ class ChuckNorrisJokesServiceTest {
 
     @Test
     void randomJoke() {
+        final JokesRepository jokesRepository = jokeEntity -> jokeEntity;
 
         // given
-        ChuckNorrisJokesService service = new ChuckNorrisJokesService();
+        ChuckNorrisJokesService service = new ChuckNorrisJokesService(jokesRepository);
 
         // when
         final ChuckNorrisJokesApiResponse response = service.randomJoke();
 
         // then
-        Assertions.assertNotNull(response, "response in null");
-
+        Assertions.assertNotNull(response, "response is null");
+        Assertions.assertNotNull(response.getValue(), "joke value is null");
+        Assertions.assertFalse(response.getValue().isEmpty(), "joke value is empty");
     }
 }
